@@ -1,4 +1,4 @@
-use crate::markdown::types::{MarkdownDocument, MarkdownElement};
+use crate::markdown::types::{MarkdownDocument, MarkdownElement, InlineText};
 
 pub fn parse_markdown(input: &str) -> MarkdownDocument {
     let mut elements = Vec::new();
@@ -25,12 +25,12 @@ pub fn parse_markdown(input: &str) -> MarkdownDocument {
             continue;
         }
         
-        // Anything else is plain text
+        // Anything else is inline text
         if !trimmed.is_empty() {
-            elements.push(MarkdownElement::PlainText { 
+            elements.push(MarkdownElement::InlineText(InlineText { 
                 content: trimmed.to_string(),
                 links: Vec::new()
-            });
+            }));
         }
     }
     
@@ -42,8 +42,17 @@ fn parse_heading(line: &str) -> Option<MarkdownElement> {
     let level = heading_chars.len();
     
     if level > 0 {
-        let content = line[level..].trim().to_string();
-        Some(MarkdownElement::Heading { level: level as u8, content })
+        let title_text = line[level..].trim().to_string();
+        let links = parse_wiki_links(line);
+        
+        Some(MarkdownElement::Heading { 
+            level: level as u8, 
+            title: InlineText {
+                content: title_text,
+                links
+            },
+            children: Vec::new()
+        })
     } else {
         None
     }
@@ -52,30 +61,45 @@ fn parse_heading(line: &str) -> Option<MarkdownElement> {
 fn parse_bullet_list(line: &str) -> Option<MarkdownElement> {
     if line.starts_with('-') {
         let content = line[1..].trim().to_string();
+        let links = parse_wiki_links(line);
+        
         Some(MarkdownElement::BulletList { 
-            items: vec![content] 
+            items: vec![InlineText {
+                content,
+                links
+            }]
         })
     } else {
         None
     }
 }
 
+fn parse_wiki_links(line: &str) -> Vec<String> {
+    let link_pattern = regex::Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
+    let mut links = Vec::new();
+
+    for capture in link_pattern.captures_iter(line) {
+        let link_text = capture.get(1).map_or("", |m| m.as_str()).trim().to_string();
+        links.push(link_text);
+    }
+
+    links
+}
+
 fn parse_wiki_link(line: &str) -> Option<MarkdownElement> {
     let link_pattern = regex::Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
     let mut links = Vec::new();
-    let mut processed_line = line.to_string();
 
     for capture in link_pattern.captures_iter(line) {
         let link_text = capture.get(1).map_or("", |m| m.as_str()).trim().to_string();
         links.push(link_text.clone());
-        processed_line = processed_line.replace(&format!("[[{}]]", link_text), "");
     }
 
     if !links.is_empty() {
-        Some(MarkdownElement::PlainText { 
-            content: processed_line.trim().to_string(), 
+        Some(MarkdownElement::InlineText(InlineText { 
+            content: line.to_string(), 
             links 
-        })
+        }))
     } else {
         None
     }
@@ -93,18 +117,51 @@ mod tests {
         assert_eq!(doc.elements.len(), 4);
         assert_eq!(doc.elements[0], MarkdownElement::Heading { 
             level: 1, 
-            content: "Heading 1".to_string() 
+            title: InlineText {
+                content: "Heading 1".to_string(),
+                links: Vec::new()
+            },
+            children: Vec::new()
         });
         assert_eq!(doc.elements[1], MarkdownElement::BulletList { 
-            items: vec!["List item".to_string()] 
+            items: vec![InlineText {
+                content: "List item".to_string(),
+                links: Vec::new()
+            }]
         });
-        assert_eq!(doc.elements[2], MarkdownElement::PlainText { 
-            content: "with text".to_string(), 
+        assert_eq!(doc.elements[2], MarkdownElement::InlineText(InlineText { 
+            content: "[[Link]] with text".to_string(), 
             links: vec!["Link".to_string()] 
-        });
-        assert_eq!(doc.elements[3], MarkdownElement::PlainText { 
-            content: "Text with".to_string(), 
+        }));
+        assert_eq!(doc.elements[3], MarkdownElement::InlineText(InlineText { 
+            content: "Text with [[Another Link]]".to_string(), 
             links: vec!["Another Link".to_string()] 
+        }));
+    }
+
+    #[test]
+    fn test_parse_markdown_with_links() {
+        let input = "# Heading with [[Link1]] and [[Link2]]\n- List item with [[Link3]]\nText with [[Link4]]";
+        let doc = parse_markdown(input);
+        
+        assert_eq!(doc.elements.len(), 3);
+        assert_eq!(doc.elements[0], MarkdownElement::Heading { 
+            level: 1, 
+            title: InlineText {
+                content: "Heading with [[Link1]] and [[Link2]]".to_string(),
+                links: vec!["Link1".to_string(), "Link2".to_string()]
+            },
+            children: Vec::new()
         });
+        assert_eq!(doc.elements[1], MarkdownElement::BulletList { 
+            items: vec![InlineText {
+                content: "List item with [[Link3]]".to_string(),
+                links: vec!["Link3".to_string()]
+            }]
+        });
+        assert_eq!(doc.elements[2], MarkdownElement::InlineText(InlineText { 
+            content: "Text with [[Link4]]".to_string(), 
+            links: vec!["Link4".to_string()] 
+        }));
     }
 }

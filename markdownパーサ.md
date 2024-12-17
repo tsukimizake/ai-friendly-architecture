@@ -3,5 +3,4 @@
 ## パースできるべきもの
 - 見出し
 - 箇条書き
-- これ以外はplain textとして持てば良い
 - plaint text内の[[]]によるリンク Plain textデータコンストラクタに添えてList Linkのように持つ

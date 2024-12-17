@@ -4,16 +4,20 @@ pub struct MarkdownDocument {
 }
 
 #[derive(Debug, PartialEq)]
+pub struct InlineText {
+    pub content: String,
+    pub links: Vec<String>,
+}
+
+#[derive(Debug, PartialEq)]
 pub enum MarkdownElement {
     Heading {
         level: u8, // h1 = 1, h2 = 2, etc.
-        content: String,
+        title: InlineText,
+        children: Vec<MarkdownElement>,
     },
     BulletList {
-        items: Vec<String>,
+        items: Vec<InlineText>,
     },
-    PlainText {
-        content: String,
-        links: Vec<String>,
-    },
+    InlineText(InlineText),
 }

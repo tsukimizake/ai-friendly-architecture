@@ -51,7 +51,7 @@ fn parse_heading(line: &str) -> Option<MarkdownElement> {
                 content: title_text,
                 links
             },
-            children: Vec::new()
+            content: Vec::new()
         })
     } else {
         None
@@ -121,7 +121,7 @@ mod tests {
                 content: "Heading 1".to_string(),
                 links: Vec::new()
             },
-            children: Vec::new()
+            content: Vec::new()
         });
         assert_eq!(doc.elements[1], MarkdownElement::BulletList { 
             items: vec![InlineText {
@@ -151,7 +151,7 @@ mod tests {
                 content: "Heading with [[Link1]] and [[Link2]]".to_string(),
                 links: vec!["Link1".to_string(), "Link2".to_string()]
             },
-            children: Vec::new()
+            content: Vec::new()
         });
         assert_eq!(doc.elements[1], MarkdownElement::BulletList { 
             items: vec![InlineText {
@@ -163,5 +163,37 @@ mod tests {
             content: "Text with [[Link4]]".to_string(), 
             links: vec!["Link4".to_string()] 
         }));
+    }
+
+    #[test]
+    fn test_multi_level_headings() {
+        let input = "# Top Level Heading\n## Second Level Heading\n### Third Level Heading with [[Link]]";
+        let doc = parse_markdown(input);
+        
+        assert_eq!(doc.elements.len(), 3);
+        assert_eq!(doc.elements[0], MarkdownElement::Heading { 
+            level: 1, 
+            title: InlineText {
+                content: "Top Level Heading".to_string(),
+                links: Vec::new()
+            },
+            content: Vec::new()
+        });
+        assert_eq!(doc.elements[1], MarkdownElement::Heading { 
+            level: 2, 
+            title: InlineText {
+                content: "Second Level Heading".to_string(),
+                links: Vec::new()
+            },
+            content: Vec::new()
+        });
+        assert_eq!(doc.elements[2], MarkdownElement::Heading { 
+            level: 3, 
+            title: InlineText {
+                content: "Third Level Heading with [[Link]]".to_string(),
+                links: vec!["Link".to_string()]
+            },
+            content: Vec::new()
+        });
     }
 }

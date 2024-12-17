@@ -14,7 +14,7 @@ pub enum MarkdownElement {
     Heading {
         level: u8, // h1 = 1, h2 = 2, etc.
         title: InlineText,
-        children: Vec<MarkdownElement>,
+        content: Vec<MarkdownElement>,
     },
     BulletList {
         items: Vec<InlineText>,

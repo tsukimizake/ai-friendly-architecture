@@ -11,12 +11,8 @@
             "id": "c4d766089f76b05d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "markdownパーサ.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "markdownパーサ.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "markdownパーサ.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "markdownパーサ.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -148,19 +140,19 @@
   },
   "active": "c4d766089f76b05d",
   "lastOpenFiles": [
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/work-products.bin",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/query-cache.bin",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/f16gku02ki74xua7p3ne3k1tt.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/ezyfqk80sp7lzbpm2r33xd9up.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/ew1bn565b3ukbyzdu2mnfyfb8.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/es3ll5bjeonw2wil8jazp05f1.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/ejojicuqv9pi7os2jnvozlaya.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/ectp12xt3q3fjq45pnx4ebdcm.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/e3jwroozv9vr4jaq73h9rgojc.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/dp60njnulv3r0fjznivc6yyar.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2sti78tcm-0lxyx3i-8fh4tlbslrsnvw8c2nbw09018/dep-graph.bin",
-    "AIフレンドリーアーキテクチャくん.md",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ezyfqk80sp7lzbpm2r33xd9up.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/work-products.bin",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/query-cache.bin",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/f16gku02ki74xua7p3ne3k1tt.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ew1bn565b3ukbyzdu2mnfyfb8.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ejojicuqv9pi7os2jnvozlaya.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/es3ll5bjeonw2wil8jazp05f1.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ectp12xt3q3fjq45pnx4ebdcm.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/e3jwroozv9vr4jaq73h9rgojc.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/dp60njnulv3r0fjznivc6yyar.o",
+    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/d68q50pvoqinep9d9c1r0yoit.o",
     "markdownパーサ.md",
+    "AIフレンドリーアーキテクチャくん.md",
     "Untitled.canvas",
     "Untitled.md",
     "2024-12-17.md"

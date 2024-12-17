@@ -28,7 +28,8 @@ pub fn parse_markdown(input: &str) -> MarkdownDocument {
         // Anything else is plain text
         if !trimmed.is_empty() {
             elements.push(MarkdownElement::PlainText { 
-                content: trimmed.to_string() 
+                content: trimmed.to_string(),
+                links: Vec::new()
             });
         }
     }
@@ -60,9 +61,21 @@ fn parse_bullet_list(line: &str) -> Option<MarkdownElement> {
 }
 
 fn parse_wiki_link(line: &str) -> Option<MarkdownElement> {
-    if line.starts_with("[[") && line.ends_with("]]") {
-        let content = line[2..line.len()-2].trim().to_string();
-        Some(MarkdownElement::Link { text: content })
+    let link_pattern = regex::Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
+    let mut links = Vec::new();
+    let mut processed_line = line.to_string();
+
+    for capture in link_pattern.captures_iter(line) {
+        let link_text = capture.get(1).map_or("", |m| m.as_str()).trim().to_string();
+        links.push(link_text.clone());
+        processed_line = processed_line.replace(&format!("[[{}]]", link_text), "");
+    }
+
+    if !links.is_empty() {
+        Some(MarkdownElement::PlainText { 
+            content: processed_line.trim().to_string(), 
+            links 
+        })
     } else {
         None
     }
@@ -74,10 +87,10 @@ mod tests {
 
     #[test]
     fn test_parse_markdown() {
-        let input = "# Heading 1\n- List item\n[[Link]]";
+        let input = "# Heading 1\n- List item\n[[Link]] with text\nText with [[Another Link]]";
         let doc = parse_markdown(input);
         
-        assert_eq!(doc.elements.len(), 3);
+        assert_eq!(doc.elements.len(), 4);
         assert_eq!(doc.elements[0], MarkdownElement::Heading { 
             level: 1, 
             content: "Heading 1".to_string() 
@@ -85,8 +98,13 @@ mod tests {
         assert_eq!(doc.elements[1], MarkdownElement::BulletList { 
             items: vec!["List item".to_string()] 
         });
-        assert_eq!(doc.elements[2], MarkdownElement::Link { 
-            text: "Link".to_string() 
+        assert_eq!(doc.elements[2], MarkdownElement::PlainText { 
+            content: "with text".to_string(), 
+            links: vec!["Link".to_string()] 
+        });
+        assert_eq!(doc.elements[3], MarkdownElement::PlainText { 
+            content: "Text with".to_string(), 
+            links: vec!["Another Link".to_string()] 
         });
     }
 }

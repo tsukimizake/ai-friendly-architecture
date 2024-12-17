@@ -11,8 +11,12 @@
             "id": "c4d766089f76b05d",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "markdownパーサ.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "markdownパーサ.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "markdownパーサ.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "markdownパーサ.md"
+              }
             }
           }
         ]
@@ -140,6 +148,8 @@
   },
   "active": "c4d766089f76b05d",
   "lastOpenFiles": [
+    "AIフレンドリーアーキテクチャくん.md",
+    "markdownパーサ.md",
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ezyfqk80sp7lzbpm2r33xd9up.o",
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/work-products.bin",
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/query-cache.bin",
@@ -150,9 +160,6 @@
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/ectp12xt3q3fjq45pnx4ebdcm.o",
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/e3jwroozv9vr4jaq73h9rgojc.o",
     "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/dp60njnulv3r0fjznivc6yyar.o",
-    "target/debug/incremental/document_vault-2tvu4fagkv6ol/s-h2su26cihv-1kcsml5-6iklqqa4368hjmqa3qgwa0va1/d68q50pvoqinep9d9c1r0yoit.o",
-    "markdownパーサ.md",
-    "AIフレンドリーアーキテクチャくん.md",
     "Untitled.canvas",
     "Untitled.md",
     "2024-12-17.md"
